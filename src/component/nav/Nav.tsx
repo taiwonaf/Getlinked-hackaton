@@ -1,7 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import CustomButton from "../button/CustomButton";
+import { Link } from "react-router-dom";
+
+const navItems = [
+  {
+    name: "Timeline",
+    path: "#timeline",
+  },
+  {
+    name: "Overview",
+    path: "#overview",
+  },
+  {
+    name: "FAQs",
+    path: "#faqs",
+  },
+  {
+    name: "Contact",
+    path: "#contact",
+  },
+];
 
 const Nav = () => {
-  return <div className="">Nav</div>;
+  const [isScrollingFromTop, setIsScrollingFromTop] = useState(true);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY === 0) {
+        setIsScrollingFromTop(true);
+      } else {
+        setIsScrollingFromTop(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  return (
+    <nav
+      className={`transition-all duration-300 fixed top-0 left-0 right-0 px-[33px] ${
+        !isScrollingFromTop ? "pt-[25px] bg-secondary" : "pt-[63px]"
+      } pb-[25px] border-b-[1px] border-b-white/[18%]`}
+    >
+      <div className="flex justify-between items-center max-w-[1255px] w-full mx-auto gap-[50px]">
+        <div className="text-[36px] font-[700] ">
+          <span className="text-white">get</span>
+          <span className="text-tertiary">Linked</span>
+        </div>
+        <div className="flex justify-between items-center max-w-[716px] w-full gap-[30px]">
+          <ul className="flex justify-between items-center max-w-[423px] w-full gap-[20px]">
+            {navItems.map((item) => (
+              <li key={item.name}>
+                <Link to={item.path} className="text-white text-[16px]">
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <CustomButton text="Register" path="/register" />
+        </div>
+      </div>
+    </nav>
+  );
 };
 
 export default Nav;
