@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CustomButton from "../button/CustomButton";
 import { Link } from "react-router-dom";
+import MobileMenu from "./MobileMenu";
+import Hamburger from "../../assets/icons/Hamburger";
 
 const navItems = [
   {
@@ -22,6 +24,7 @@ const navItems = [
 ];
 
 const Nav = () => {
+  const [mobileMenu, setMobileMenu] = useState(true);
   const [isScrollingFromTop, setIsScrollingFromTop] = useState(true);
 
   useEffect(() => {
@@ -50,7 +53,8 @@ const Nav = () => {
           <span className="text-white">get</span>
           <span className="text-tertiary">Linked</span>
         </div>
-        <div className="flex justify-between items-center max-w-[716px] w-full gap-[30px]">
+        {/* Desktop menu items */}
+        <div className="hidden md:flex justify-between items-center max-w-[716px] w-full gap-[30px]">
           <ul className="flex justify-between items-center max-w-[423px] w-full gap-[20px]">
             {navItems.map((item) => (
               <li key={item.name}>
@@ -62,7 +66,12 @@ const Nav = () => {
           </ul>
           <CustomButton text="Register" path="/register" />
         </div>
+        {/* Mobile menu items */}
+        <div className="md:hidden" onClick={() => setMobileMenu(!mobileMenu)}>
+          <Hamburger />
+        </div>
       </div>
+      <MobileMenu open={mobileMenu} setOpen={setMobileMenu} />
     </nav>
   );
 };
