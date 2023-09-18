@@ -24,7 +24,7 @@ const navItems = [
 ];
 
 const Nav = () => {
-  const [mobileMenu, setMobileMenu] = useState(true);
+  const [mobileMenu, setMobileMenu] = useState(false);
   const [isScrollingFromTop, setIsScrollingFromTop] = useState(true);
 
   useEffect(() => {

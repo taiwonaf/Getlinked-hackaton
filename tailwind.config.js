@@ -13,6 +13,9 @@ export default {
         tertiary: {
           DEFAULT: "#D434FE",
         },
+        pink: {
+          DEFAULT: "#FF26B9",
+        },
       },
       background: {
         btnGradient:
